@@ -18,12 +18,12 @@ package frc.robot;
 public final class Constants {
     public static final int kControllerPort = 0;
 
-    public static final int kLeftFrontPort = 0;
-    public static final int kRightFrontPort = 1;
+    public static final int kLeftFrontPort = 1;
+    public static final int kRightFrontPort = 3;
     public static final int kLeftRearPort = 2;
-    public static final int kRightRearPort = 3;
+    public static final int kRightRearPort = 4;
 
-    public static final int compressorModule = 0;
+    public static final int compressorModule = 20;
 
     public static final int flagPort = 0;
 
