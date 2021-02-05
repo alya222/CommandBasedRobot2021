@@ -26,8 +26,10 @@ public class Flag extends SubsystemBase {
   public void flagSwitch() {
       if (flagUp) {
           flag.set(false);
+          flagUp = false;
       } else {
           flag.set(true);
+          flagUp = true;
       }
   }
 
