@@ -35,15 +35,13 @@ public class RobotContainer {
   
   private final Flag flag = new Flag();
 
-  private Command manualDrive = new RunCommand( 
-    () -> drivetrain.getDifferentialDrive().tankDrive(
-      xbox.getRawAxis(Axis.kLeftY.value),
-      xbox.getRawAxis(Axis.kLeftY.value),
-      false
-    ), 
-    drivetrain
-    
-    );
+  private Command manualDrive = new RunCommand(() -> drivetrain.getDifferentialDrive().tankDrive(
+    xbox.getRawAxis(Axis.kLeftY.value), 
+    xbox.getRawAxis(Axis.kRightY.value), 
+    false
+  ), 
+  drivetrain
+);
 
 
 
