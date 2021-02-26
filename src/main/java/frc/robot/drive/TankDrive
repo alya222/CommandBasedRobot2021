@@ -5,28 +5,27 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.drive;
 
 /*import frc.robot.Robot;
 import frc.robot.RobotContainer;*/
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.drive.RevDrivetrain;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
 
 /**
  * An example command that uses an example subsystem.
  */
 public class TankDrive extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+   /* @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
-  private Drivetrain drivetrain;
+  private RevDrivetrain drivetrain;
 
   XboxController xbox = new XboxController(0);
-  public TankDrive(Drivetrain drivetrain1) {
+  public TankDrive(RevDrivetrain drivetrain1) {
     //use requires() here to declare subsystem dependencies
-    /*addRequirements(Robot.drive);
-    addRequirements(RobotContainer.drive);*/
+    addRequirements(Robot.drive);
+    addRequirements(RobotContainer.drive);
     drivetrain = drivetrain1;
   }
 
@@ -53,5 +52,5 @@ public class TankDrive extends CommandBase {
   @Override
   public boolean isFinished() {
     return false;
-  }
+  } */
 }
