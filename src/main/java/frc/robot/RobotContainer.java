@@ -25,8 +25,8 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import frc.robot.shooter.ChangePosition;
 import frc.robot.shooter.Conveyor;
 import frc.robot.shooter.Plucker;
-//import frc.robot.vision.AimTarget;
-//import frc.robot.vision.Limelight;
+import frc.robot.vision.AimTarget;
+import frc.robot.vision.Limelight;
 //import frc.robot.climber.Lift;
 import frc.robot.drive.Gears;
 import frc.robot.drive.RevDrivetrain;
@@ -43,7 +43,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.Arrays;
 
 import static frc.robot.Constants.*;
-//import static frc.robot.Gains.Ramsete.*;
+import static frc.robot.Gains.Ramsete.*;
 
 
 /**
@@ -58,14 +58,15 @@ public class RobotContainer {
   
   // drive subsystem
   private final RevDrivetrain rDrive = new RevDrivetrain();
-
-  //private final Drivetrain drivetrain = new Drivetrain();
   
   private final ChangePosition goalMover = new ChangePosition();
 
+  // limelight subsystem
+  private final Limelight limelight = new Limelight();
+
   //private final Lift lift = new Lift();
 
-  private final Shooter shooter = new Shooter(goalMover);
+  private final Shooter shooter = new Shooter(goalMover, limelight);
 
   private final Conveyor conveyor = new Conveyor(goalMover);
 
@@ -76,14 +77,24 @@ public class RobotContainer {
   // update PID values
   private final Update update = new Update(shooter, plucker);
 
+  /* -- DEADBAND --
   private Command manualDrive = new RunCommand(
     () -> rDrive.getDifferentialDrive().tankDrive(
-    drivePercentLimit * xbox.getRawAxis(kLeftY.value), 
-    drivePercentLimit * xbox.getRawAxis(kRightY.value), 
+    rDrive.deadband(drivePercentLimit * xbox.getRawAxis(kLeftY.value), percentDeadband), 
+    rDrive.deadband(drivePercentLimit * xbox.getRawAxis(kRightY.value), percentDeadband), 
     false
   ), 
   rDrive
-);
+); */
+
+private Command manualDrive = new RunCommand(
+    () -> rDrive.getDifferentialDrive().tankDrive(
+    (drivePercentLimit * xbox.getRawAxis(kLeftY.value)), 
+    (drivePercentLimit * xbox.getRawAxis(kRightY.value)), 
+    false
+  ), 
+  rDrive
+); 
 
 /*
 private Command moveArmOneAxis = new RunCommand(
@@ -160,11 +171,11 @@ private SequentialCommandGroup waitAndFeed = new SequentialCommandGroup(
     .whenPressed(new ConditionalCommand(waitAndFeed, stopFeeders, shooter::isEngaged));
   
 
-  /*
+  
   // vision correction
   new JoystickButton(xbox, kX.value)
   .whileHeld(new AimTarget(limelight, rDrive));
-  */
+  
 
   //switch gears
   new JoystickButton(xbox, kBumperRight.value)
@@ -173,9 +184,9 @@ private SequentialCommandGroup waitAndFeed = new SequentialCommandGroup(
   }
 
   public void init() {
-    //limelight.driverMode();
-    //limelight.lightOff();
-    //limelight.PiPSecondaryStream();
+    limelight.driverMode();
+    limelight.lightOff();
+    limelight.PiPSecondaryStream();
 
     shooter.stop();
     plucker.stop();
@@ -186,6 +197,7 @@ private SequentialCommandGroup waitAndFeed = new SequentialCommandGroup(
     update.periodic();
   }
 
+  /*
   private Trajectory getMovingTrajectory() {
     Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
       Arrays.asList(Update.getStartingPose(), new Pose2d(1.0, 0, new Rotation2d()),
@@ -194,7 +206,7 @@ private SequentialCommandGroup waitAndFeed = new SequentialCommandGroup(
     );
 
     return trajectory;
-  }
+  }*/
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

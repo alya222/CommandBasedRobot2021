@@ -64,6 +64,21 @@ public class RevDrivetrain extends SubsystemBase {
 
   }
 
+/* -- DEADBAND --
+  public double deadband (double JoystickValue, double DeadbandCutOff) {
+  
+    double deadbandReturn;
+  
+    if (Math.abs(JoystickValue) < DeadbandCutOff) {
+      deadbandReturn = 0;
+  
+    } else {
+  
+      deadbandReturn = JoystickValue;
+    }
+    return deadbandReturn;
+  } */
+
   public void limiterDrive(double leftPercent, double rightPercent) {
     roboDrive.tankDrive(leftLimiter.calculate(leftPercent), rightLimiter.calculate(rightPercent), false);
   }

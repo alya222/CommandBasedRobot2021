@@ -8,7 +8,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-//import frc.robot.vision.Limelight;
+import frc.robot.vision.Limelight;
 
 import static frc.robot.Gains.shooterPID.*;
 
@@ -18,7 +18,7 @@ import static frc.robot.Constants.*;
 public class Shooter extends SubsystemBase {
     private ChangePosition goalMover;
 
-    //private Limelight vision;
+    private Limelight vision;
 
     private CANSparkMax launcher = new CANSparkMax(kShooterPort, MotorType.kBrushless);
 
@@ -29,10 +29,10 @@ public class Shooter extends SubsystemBase {
     // Create toggle for shooting
     private boolean engaged = false;
 
-    public Shooter(ChangePosition changePosition/*, Limelight limelight*/) {
+    public Shooter(ChangePosition changePosition, Limelight limelight) {
         // Makes changePosition instance the same as in RobotContainer
         goalMover = changePosition;
-        //vision = limelight;
+        vision = limelight;
         // Spark PID Stuff
         launcherController.setP(kP);
         launcherController.setI(kI);
@@ -158,13 +158,14 @@ public class Shooter extends SubsystemBase {
     public void toggleRelativeSpeedSpark(double distance) {
         if (engaged) {
             stop();
-            //vision.driverMode();
-            //vision.lightOff();
+            
+            vision.driverMode();
+            vision.lightOff();
         
         } else {
             setRelativeSpeedSpark(distance);
-            //vision.visionMode();
-            //vision.lightOn();
+            vision.visionMode();
+            vision.lightOn();
         }
     }
 

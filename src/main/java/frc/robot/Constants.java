@@ -59,7 +59,7 @@ public final class Constants {
     public static final double kGearRatio = 7.29;
     public static final double kDriveWheelRadiusMeters = Units.inchesToMeters(3.0);
     public static final double kShooterWheelRadiusMeters = Units.inchesToMeters(3.0);
-    public static final double MaxSafeVelocityMeters = Units.feetToMeters(3.0);
+    public static final double MaxSafeVelocityMeters = Units.feetToMeters(2);
     public static final double MaxSafeAccelerationMeters = Units.feetToMeters(2);
     public static final double targetToCameraHeight = 5;
     public static final double cameraAngle = 0;
@@ -73,7 +73,9 @@ public final class Constants {
     public static final double shooterHeight = Units.inchesToMeters(18);
 
     //constant speeds
-    public static final double drivePercentLimit = 1;
+    public static final double drivePercentLimit = 1.0;
+
+    public static final double percentDeadband = 0.05;
     //public static final double rotationMagnitude = 360;
 
     public static final double armPercentSpeed = 0.4;
@@ -81,7 +83,7 @@ public final class Constants {
     public static final double intakeVolts = -4;
     public static final double shooterVolts = 12;
 
-    public static final double inConveyorVolts = 12;
+    public static final double inConveyorVolts = -12;
     public static final double outConveyorVolts = 12;
 
     public static final double inPluckerVolts = -12;
@@ -104,6 +106,7 @@ public final class Constants {
     public static final double shooterDistanceFromTargetMeters = 5;
 
     public static final double shooterRampUpTime = 2;
+    
     public static final double pluckerHoldTime = shooterRampUpTime;
 
     
