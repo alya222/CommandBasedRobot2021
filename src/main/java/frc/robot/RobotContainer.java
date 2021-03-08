@@ -27,7 +27,7 @@ import frc.robot.shooter.Conveyor;
 import frc.robot.shooter.Plucker;
 import frc.robot.vision.AimTarget;
 import frc.robot.vision.Limelight;
-//import frc.robot.climber.Lift;
+import frc.robot.climber.Lift;
 import frc.robot.drive.Gears;
 import frc.robot.drive.RevDrivetrain;
 import frc.robot.shooter.Shooter;
@@ -64,7 +64,7 @@ public class RobotContainer {
   // limelight subsystem
   private final Limelight limelight = new Limelight();
 
-  //private final Lift lift = new Lift();
+  private final Lift lift = new Lift();
 
   private final Shooter shooter = new Shooter(goalMover, limelight);
 
@@ -96,13 +96,13 @@ private Command manualDrive = new RunCommand(
   rDrive
 ); 
 
-/*
+
 private Command moveArmOneAxis = new RunCommand(
   () -> lift.moveOneAxis(xbox.getRawAxis(kLeftTrigger.value)), lift);
 
 private Command moveArm = new RunCommand(
   () -> lift.move(xbox.getRawAxis(kRightTrigger.value) - xbox.getRawAxis(kLeftTrigger.value)), lift);
-*/
+
 
 // -- Command Groups --
 
@@ -141,7 +141,7 @@ private SequentialCommandGroup waitAndFeed = new SequentialCommandGroup(
     configureButtonBindings();
 
     rDrive.setDefaultCommand(manualDrive);
-    //lift.setDefaultCommand(moveSpinner);
+      lift.setDefaultCommand(moveArm);
   }
 
   /**
@@ -152,17 +152,17 @@ private SequentialCommandGroup waitAndFeed = new SequentialCommandGroup(
    */
   private void configureButtonBindings() {
 
-        // Switch position between shooting and intake
+    // switch position between shooting and intake
     new JoystickButton(xbox, kA.value)
     .whenPressed(new InstantCommand(() -> goalMover.swapHeight(), goalMover));
 
-    // Shoot or intake with voltage, aiming for low goal
+    // shoot or intake with voltage, aiming for low goal
     new JoystickButton(xbox, kBumperLeft.value)
     .whenPressed(new InstantCommand(() -> shooter.toggleSpeedVolts(), shooter))
     .whenPressed(new InstantCommand(() -> conveyor.toggleSpeed(), shooter))
     .whenPressed(new InstantCommand(() -> plucker.toggleSpeed(), plucker));
     
-    // Shoot or intake with set velocity, specifically for high goal
+    // shoot or intake with set velocity, specifically for high goal
     new JoystickButton(xbox, kB.value)
     .whenPressed(new InstantCommand(() -> plucker.toggleSpeed(), plucker));
 
@@ -177,7 +177,7 @@ private SequentialCommandGroup waitAndFeed = new SequentialCommandGroup(
   .whileHeld(new AimTarget(limelight, rDrive));
   
 
-  //switch gears
+  // switch gears
   new JoystickButton(xbox, kBumperRight.value)
   .whenPressed(() -> gears.switchGears(), gears);
 
