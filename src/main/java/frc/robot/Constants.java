@@ -90,7 +90,10 @@ public final class Constants {
     public static final double outPluckerVolts = 12;
 
     public static final double intakeRPM = -1000;
-    public static final double shooterRPM = 3000;
+    public static final double nearShooterRPM = 2300;
+    public static final double midShooterRPM = 3000;
+    public static final double farShooterRPM = 3500;
+
 
     /*public static final double colorSwitchSpeed = 0.2;
     public static final double colorSpeed = 0.1;*/

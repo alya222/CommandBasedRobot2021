@@ -37,7 +37,7 @@ public class Update {
         SmartDashboard.putNumber("D value(angle)", angleCorrection.kD);
 
         //display left and right shooter velocities
-        SmartDashboard.putNumber("Shooter RPM", m_shooter.getVelocity());
+        SmartDashboard.putNumber("Current RPM", m_shooter.getVelocity());
 
         // displays whether plucker is engaged
         SmartDashboard.putBoolean("Plucker Engaged", m_plucker.getEngaged());
@@ -50,7 +50,7 @@ public class Update {
 
     public void periodic() {
         // update left and right shooter velocities
-        SmartDashboard.putNumber("Shooter RPM", m_shooter.getVelocity());
+        SmartDashboard.putNumber("Current RPM", m_shooter.getVelocity());
 
         // displays whether plucker is engaged
         SmartDashboard.putBoolean("Plucker Engaged", m_plucker.getEngaged());
